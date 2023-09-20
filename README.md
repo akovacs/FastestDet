@@ -58,6 +58,22 @@ The following configuration was tested on Python 3.10:
 <img src="https://github.com/dog-qiuqiu/FastestDet/blob/main/result.png"> />
 </div>
 
+## Batch Test
+
+  ```
+  # Extract JPEG frames from first 10 seconds of the input video
+  mkdir frames
+  ffmpeg -t 10 -i input.mp4 frames/frames%04d.jpg
+  
+  # Execute object detection
+  python3 test_batch.py --yaml configs/coco.yaml \
+    --weight weights/weight_AP05:0.253207_280-epoch.pth --img "frames/frames*.jpg"
+  
+  # Combine JPEG frames into output video
+  ffmpeg -framerate 30 -pattern_type glob -i 'output-imgs/*.jpg' \
+    -c:v libx264 -pix_fmt yuv420p out.mp4
+  ```
+
 ## How to train
 ### Building data sets(The dataset is constructed in the same way as darknet yolo)
 * The format of the data set is the same as that of Darknet Yolo, Each image corresponds to a .txt label file. The label format is also based on Darknet Yolo's data set label format: "category cx cy wh", where category is the category subscript, cx, cy are the coordinates of the center point of the normalized label box, and w, h are the normalized label box The width and height, .txt label file content example as follows:
