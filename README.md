@@ -34,8 +34,18 @@ Radxa rock3a|RK3568(NPU)|Linux(aarch64)|rknn|28ms|-
 Qualcomm|Snapdragon 835(arm-cpu)|Android(aarch64)|ncnn|32.34ms|16.24ms
 Intel|i7-8700(X86-cpu)|Linux(amd64)|ncnn|4.51ms|4.33ms
 # How to use
-## Dependent installation
-* PiP(Note pytorch CUDA version selection)
+## Install Dependencies
+
+The following configuration was tested on Python 3.10:
+
+  ```
+  sudo apt install cmake git python3-pip
+  ```
+
+  ```
+  pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+  ```
+
   ```
   pip install -r requirements.txt
   ```
